@@ -47,7 +47,6 @@ unsigned char CRC8(unsigned char *arr, unsigned short len) {
 	return crc;
 }
 
-// TODO 速度精度误差
 void Send_ChassisData() {
 
 	int i = 0, len = 0x07;
@@ -93,8 +92,8 @@ void Receive_ChassisData(unsigned char receiveBuffer[]) {
 				RightTargetSpeed.data[i] = tempBuffer[i + 5];
 			}
 			unsigned char control = tempBuffer[9];
-			chassisData.leftTargetSpeed = (int) LeftTargetSpeed.val;
-			chassisData.rightTargetSpeed = (int) RightTargetSpeed.val;
+			chassisData.leftTargetSpeed = (float) LeftTargetSpeed.val;
+			chassisData.rightTargetSpeed = (float) RightTargetSpeed.val;
 			// 移位读取控制位
 			chassisData.leftDirection = 0b00001100 & control;
 			chassisData.leftDirection >>= 2;
